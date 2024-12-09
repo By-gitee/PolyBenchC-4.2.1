@@ -24,22 +24,22 @@ define dso_local i32 @main(i32 noundef %0, ptr noundef %1) #0 {
   store i32 0, ptr %3, align 4
   store i32 %0, ptr %4, align 4
   store ptr %1, ptr %5, align 8
-  store i32 2500, ptr %6, align 4
-  %9 = call ptr @polybench_alloc_data(i64 noundef 2500, i32 noundef 1)
+  store i32 500, ptr %6, align 4
+  %9 = call ptr @polybench_alloc_data(i64 noundef 500, i32 noundef 1)
   store ptr %9, ptr %7, align 8
-  %10 = call ptr @polybench_alloc_data(i64 noundef 6250000, i32 noundef 4)
+  %10 = call ptr @polybench_alloc_data(i64 noundef 250000, i32 noundef 4)
   store ptr %10, ptr %8, align 8
   %11 = load i32, ptr %6, align 4
   %12 = load ptr, ptr %7, align 8
-  %13 = getelementptr inbounds [2500 x i8], ptr %12, i64 0, i64 0
+  %13 = getelementptr inbounds [500 x i8], ptr %12, i64 0, i64 0
   %14 = load ptr, ptr %8, align 8
-  %15 = getelementptr inbounds [2500 x [2500 x i32]], ptr %14, i64 0, i64 0
+  %15 = getelementptr inbounds [500 x [500 x i32]], ptr %14, i64 0, i64 0
   call void @init_array(i32 noundef %11, ptr noundef %13, ptr noundef %15)
   %16 = load i32, ptr %6, align 4
   %17 = load ptr, ptr %7, align 8
-  %18 = getelementptr inbounds [2500 x i8], ptr %17, i64 0, i64 0
+  %18 = getelementptr inbounds [500 x i8], ptr %17, i64 0, i64 0
   %19 = load ptr, ptr %8, align 8
-  %20 = getelementptr inbounds [2500 x [2500 x i32]], ptr %19, i64 0, i64 0
+  %20 = getelementptr inbounds [500 x [500 x i32]], ptr %19, i64 0, i64 0
   call void @kernel_nussinov(i32 noundef %16, ptr noundef %18, ptr noundef %20)
   %21 = load i32, ptr %4, align 4
   %22 = icmp sgt i32 %21, 42
@@ -56,7 +56,7 @@ define dso_local i32 @main(i32 noundef %0, ptr noundef %1) #0 {
 29:                                               ; preds = %23
   %30 = load i32, ptr %6, align 4
   %31 = load ptr, ptr %8, align 8
-  %32 = getelementptr inbounds [2500 x [2500 x i32]], ptr %31, i64 0, i64 0
+  %32 = getelementptr inbounds [500 x [500 x i32]], ptr %31, i64 0, i64 0
   call void @print_array(i32 noundef %30, ptr noundef %32)
   br label %33
 
@@ -131,10 +131,10 @@ define internal void @init_array(i32 noundef %0, ptr noundef %1, ptr noundef %2)
   %36 = load ptr, ptr %6, align 8
   %37 = load i32, ptr %7, align 4
   %38 = sext i32 %37 to i64
-  %39 = getelementptr inbounds [2500 x i32], ptr %36, i64 %38
+  %39 = getelementptr inbounds [500 x i32], ptr %36, i64 %38
   %40 = load i32, ptr %8, align 4
   %41 = sext i32 %40 to i64
-  %42 = getelementptr inbounds [2500 x i32], ptr %39, i64 0, i64 %41
+  %42 = getelementptr inbounds [500 x i32], ptr %39, i64 0, i64 %41
   store i32 0, ptr %42, align 4
   br label %43
 
@@ -200,19 +200,19 @@ define internal void @kernel_nussinov(i32 noundef %0, ptr noundef %1, ptr nounde
   %27 = load ptr, ptr %6, align 8
   %28 = load i32, ptr %7, align 4
   %29 = sext i32 %28 to i64
-  %30 = getelementptr inbounds [2500 x i32], ptr %27, i64 %29
+  %30 = getelementptr inbounds [500 x i32], ptr %27, i64 %29
   %31 = load i32, ptr %8, align 4
   %32 = sext i32 %31 to i64
-  %33 = getelementptr inbounds [2500 x i32], ptr %30, i64 0, i64 %32
+  %33 = getelementptr inbounds [500 x i32], ptr %30, i64 0, i64 %32
   %34 = load i32, ptr %33, align 4
   %35 = load ptr, ptr %6, align 8
   %36 = load i32, ptr %7, align 4
   %37 = sext i32 %36 to i64
-  %38 = getelementptr inbounds [2500 x i32], ptr %35, i64 %37
+  %38 = getelementptr inbounds [500 x i32], ptr %35, i64 %37
   %39 = load i32, ptr %8, align 4
   %40 = sub nsw i32 %39, 1
   %41 = sext i32 %40 to i64
-  %42 = getelementptr inbounds [2500 x i32], ptr %38, i64 0, i64 %41
+  %42 = getelementptr inbounds [500 x i32], ptr %38, i64 0, i64 %41
   %43 = load i32, ptr %42, align 4
   %44 = icmp sge i32 %34, %43
   br i1 %44, label %45, label %54
@@ -221,10 +221,10 @@ define internal void @kernel_nussinov(i32 noundef %0, ptr noundef %1, ptr nounde
   %46 = load ptr, ptr %6, align 8
   %47 = load i32, ptr %7, align 4
   %48 = sext i32 %47 to i64
-  %49 = getelementptr inbounds [2500 x i32], ptr %46, i64 %48
+  %49 = getelementptr inbounds [500 x i32], ptr %46, i64 %48
   %50 = load i32, ptr %8, align 4
   %51 = sext i32 %50 to i64
-  %52 = getelementptr inbounds [2500 x i32], ptr %49, i64 0, i64 %51
+  %52 = getelementptr inbounds [500 x i32], ptr %49, i64 0, i64 %51
   %53 = load i32, ptr %52, align 4
   br label %64
 
@@ -232,11 +232,11 @@ define internal void @kernel_nussinov(i32 noundef %0, ptr noundef %1, ptr nounde
   %55 = load ptr, ptr %6, align 8
   %56 = load i32, ptr %7, align 4
   %57 = sext i32 %56 to i64
-  %58 = getelementptr inbounds [2500 x i32], ptr %55, i64 %57
+  %58 = getelementptr inbounds [500 x i32], ptr %55, i64 %57
   %59 = load i32, ptr %8, align 4
   %60 = sub nsw i32 %59, 1
   %61 = sext i32 %60 to i64
-  %62 = getelementptr inbounds [2500 x i32], ptr %58, i64 0, i64 %61
+  %62 = getelementptr inbounds [500 x i32], ptr %58, i64 0, i64 %61
   %63 = load i32, ptr %62, align 4
   br label %64
 
@@ -245,10 +245,10 @@ define internal void @kernel_nussinov(i32 noundef %0, ptr noundef %1, ptr nounde
   %66 = load ptr, ptr %6, align 8
   %67 = load i32, ptr %7, align 4
   %68 = sext i32 %67 to i64
-  %69 = getelementptr inbounds [2500 x i32], ptr %66, i64 %68
+  %69 = getelementptr inbounds [500 x i32], ptr %66, i64 %68
   %70 = load i32, ptr %8, align 4
   %71 = sext i32 %70 to i64
-  %72 = getelementptr inbounds [2500 x i32], ptr %69, i64 0, i64 %71
+  %72 = getelementptr inbounds [500 x i32], ptr %69, i64 0, i64 %71
   store i32 %65, ptr %72, align 4
   br label %73
 
@@ -263,19 +263,19 @@ define internal void @kernel_nussinov(i32 noundef %0, ptr noundef %1, ptr nounde
   %79 = load ptr, ptr %6, align 8
   %80 = load i32, ptr %7, align 4
   %81 = sext i32 %80 to i64
-  %82 = getelementptr inbounds [2500 x i32], ptr %79, i64 %81
+  %82 = getelementptr inbounds [500 x i32], ptr %79, i64 %81
   %83 = load i32, ptr %8, align 4
   %84 = sext i32 %83 to i64
-  %85 = getelementptr inbounds [2500 x i32], ptr %82, i64 0, i64 %84
+  %85 = getelementptr inbounds [500 x i32], ptr %82, i64 0, i64 %84
   %86 = load i32, ptr %85, align 4
   %87 = load ptr, ptr %6, align 8
   %88 = load i32, ptr %7, align 4
   %89 = add nsw i32 %88, 1
   %90 = sext i32 %89 to i64
-  %91 = getelementptr inbounds [2500 x i32], ptr %87, i64 %90
+  %91 = getelementptr inbounds [500 x i32], ptr %87, i64 %90
   %92 = load i32, ptr %8, align 4
   %93 = sext i32 %92 to i64
-  %94 = getelementptr inbounds [2500 x i32], ptr %91, i64 0, i64 %93
+  %94 = getelementptr inbounds [500 x i32], ptr %91, i64 0, i64 %93
   %95 = load i32, ptr %94, align 4
   %96 = icmp sge i32 %86, %95
   br i1 %96, label %97, label %106
@@ -284,10 +284,10 @@ define internal void @kernel_nussinov(i32 noundef %0, ptr noundef %1, ptr nounde
   %98 = load ptr, ptr %6, align 8
   %99 = load i32, ptr %7, align 4
   %100 = sext i32 %99 to i64
-  %101 = getelementptr inbounds [2500 x i32], ptr %98, i64 %100
+  %101 = getelementptr inbounds [500 x i32], ptr %98, i64 %100
   %102 = load i32, ptr %8, align 4
   %103 = sext i32 %102 to i64
-  %104 = getelementptr inbounds [2500 x i32], ptr %101, i64 0, i64 %103
+  %104 = getelementptr inbounds [500 x i32], ptr %101, i64 0, i64 %103
   %105 = load i32, ptr %104, align 4
   br label %116
 
@@ -296,10 +296,10 @@ define internal void @kernel_nussinov(i32 noundef %0, ptr noundef %1, ptr nounde
   %108 = load i32, ptr %7, align 4
   %109 = add nsw i32 %108, 1
   %110 = sext i32 %109 to i64
-  %111 = getelementptr inbounds [2500 x i32], ptr %107, i64 %110
+  %111 = getelementptr inbounds [500 x i32], ptr %107, i64 %110
   %112 = load i32, ptr %8, align 4
   %113 = sext i32 %112 to i64
-  %114 = getelementptr inbounds [2500 x i32], ptr %111, i64 0, i64 %113
+  %114 = getelementptr inbounds [500 x i32], ptr %111, i64 0, i64 %113
   %115 = load i32, ptr %114, align 4
   br label %116
 
@@ -308,10 +308,10 @@ define internal void @kernel_nussinov(i32 noundef %0, ptr noundef %1, ptr nounde
   %118 = load ptr, ptr %6, align 8
   %119 = load i32, ptr %7, align 4
   %120 = sext i32 %119 to i64
-  %121 = getelementptr inbounds [2500 x i32], ptr %118, i64 %120
+  %121 = getelementptr inbounds [500 x i32], ptr %118, i64 %120
   %122 = load i32, ptr %8, align 4
   %123 = sext i32 %122 to i64
-  %124 = getelementptr inbounds [2500 x i32], ptr %121, i64 0, i64 %123
+  %124 = getelementptr inbounds [500 x i32], ptr %121, i64 0, i64 %123
   store i32 %117, ptr %124, align 4
   br label %125
 
@@ -339,20 +339,20 @@ define internal void @kernel_nussinov(i32 noundef %0, ptr noundef %1, ptr nounde
   %140 = load ptr, ptr %6, align 8
   %141 = load i32, ptr %7, align 4
   %142 = sext i32 %141 to i64
-  %143 = getelementptr inbounds [2500 x i32], ptr %140, i64 %142
+  %143 = getelementptr inbounds [500 x i32], ptr %140, i64 %142
   %144 = load i32, ptr %8, align 4
   %145 = sext i32 %144 to i64
-  %146 = getelementptr inbounds [2500 x i32], ptr %143, i64 0, i64 %145
+  %146 = getelementptr inbounds [500 x i32], ptr %143, i64 0, i64 %145
   %147 = load i32, ptr %146, align 4
   %148 = load ptr, ptr %6, align 8
   %149 = load i32, ptr %7, align 4
   %150 = add nsw i32 %149, 1
   %151 = sext i32 %150 to i64
-  %152 = getelementptr inbounds [2500 x i32], ptr %148, i64 %151
+  %152 = getelementptr inbounds [500 x i32], ptr %148, i64 %151
   %153 = load i32, ptr %8, align 4
   %154 = sub nsw i32 %153, 1
   %155 = sext i32 %154 to i64
-  %156 = getelementptr inbounds [2500 x i32], ptr %152, i64 0, i64 %155
+  %156 = getelementptr inbounds [500 x i32], ptr %152, i64 0, i64 %155
   %157 = load i32, ptr %156, align 4
   %158 = load ptr, ptr %5, align 8
   %159 = load i32, ptr %7, align 4
@@ -378,10 +378,10 @@ define internal void @kernel_nussinov(i32 noundef %0, ptr noundef %1, ptr nounde
   %177 = load ptr, ptr %6, align 8
   %178 = load i32, ptr %7, align 4
   %179 = sext i32 %178 to i64
-  %180 = getelementptr inbounds [2500 x i32], ptr %177, i64 %179
+  %180 = getelementptr inbounds [500 x i32], ptr %177, i64 %179
   %181 = load i32, ptr %8, align 4
   %182 = sext i32 %181 to i64
-  %183 = getelementptr inbounds [2500 x i32], ptr %180, i64 0, i64 %182
+  %183 = getelementptr inbounds [500 x i32], ptr %180, i64 0, i64 %182
   %184 = load i32, ptr %183, align 4
   br label %213
 
@@ -390,11 +390,11 @@ define internal void @kernel_nussinov(i32 noundef %0, ptr noundef %1, ptr nounde
   %187 = load i32, ptr %7, align 4
   %188 = add nsw i32 %187, 1
   %189 = sext i32 %188 to i64
-  %190 = getelementptr inbounds [2500 x i32], ptr %186, i64 %189
+  %190 = getelementptr inbounds [500 x i32], ptr %186, i64 %189
   %191 = load i32, ptr %8, align 4
   %192 = sub nsw i32 %191, 1
   %193 = sext i32 %192 to i64
-  %194 = getelementptr inbounds [2500 x i32], ptr %190, i64 0, i64 %193
+  %194 = getelementptr inbounds [500 x i32], ptr %190, i64 0, i64 %193
   %195 = load i32, ptr %194, align 4
   %196 = load ptr, ptr %5, align 8
   %197 = load i32, ptr %7, align 4
@@ -420,10 +420,10 @@ define internal void @kernel_nussinov(i32 noundef %0, ptr noundef %1, ptr nounde
   %215 = load ptr, ptr %6, align 8
   %216 = load i32, ptr %7, align 4
   %217 = sext i32 %216 to i64
-  %218 = getelementptr inbounds [2500 x i32], ptr %215, i64 %217
+  %218 = getelementptr inbounds [500 x i32], ptr %215, i64 %217
   %219 = load i32, ptr %8, align 4
   %220 = sext i32 %219 to i64
-  %221 = getelementptr inbounds [2500 x i32], ptr %218, i64 0, i64 %220
+  %221 = getelementptr inbounds [500 x i32], ptr %218, i64 0, i64 %220
   store i32 %214, ptr %221, align 4
   br label %271
 
@@ -431,20 +431,20 @@ define internal void @kernel_nussinov(i32 noundef %0, ptr noundef %1, ptr nounde
   %223 = load ptr, ptr %6, align 8
   %224 = load i32, ptr %7, align 4
   %225 = sext i32 %224 to i64
-  %226 = getelementptr inbounds [2500 x i32], ptr %223, i64 %225
+  %226 = getelementptr inbounds [500 x i32], ptr %223, i64 %225
   %227 = load i32, ptr %8, align 4
   %228 = sext i32 %227 to i64
-  %229 = getelementptr inbounds [2500 x i32], ptr %226, i64 0, i64 %228
+  %229 = getelementptr inbounds [500 x i32], ptr %226, i64 0, i64 %228
   %230 = load i32, ptr %229, align 4
   %231 = load ptr, ptr %6, align 8
   %232 = load i32, ptr %7, align 4
   %233 = add nsw i32 %232, 1
   %234 = sext i32 %233 to i64
-  %235 = getelementptr inbounds [2500 x i32], ptr %231, i64 %234
+  %235 = getelementptr inbounds [500 x i32], ptr %231, i64 %234
   %236 = load i32, ptr %8, align 4
   %237 = sub nsw i32 %236, 1
   %238 = sext i32 %237 to i64
-  %239 = getelementptr inbounds [2500 x i32], ptr %235, i64 0, i64 %238
+  %239 = getelementptr inbounds [500 x i32], ptr %235, i64 0, i64 %238
   %240 = load i32, ptr %239, align 4
   %241 = icmp sge i32 %230, %240
   br i1 %241, label %242, label %251
@@ -453,10 +453,10 @@ define internal void @kernel_nussinov(i32 noundef %0, ptr noundef %1, ptr nounde
   %243 = load ptr, ptr %6, align 8
   %244 = load i32, ptr %7, align 4
   %245 = sext i32 %244 to i64
-  %246 = getelementptr inbounds [2500 x i32], ptr %243, i64 %245
+  %246 = getelementptr inbounds [500 x i32], ptr %243, i64 %245
   %247 = load i32, ptr %8, align 4
   %248 = sext i32 %247 to i64
-  %249 = getelementptr inbounds [2500 x i32], ptr %246, i64 0, i64 %248
+  %249 = getelementptr inbounds [500 x i32], ptr %246, i64 0, i64 %248
   %250 = load i32, ptr %249, align 4
   br label %262
 
@@ -465,11 +465,11 @@ define internal void @kernel_nussinov(i32 noundef %0, ptr noundef %1, ptr nounde
   %253 = load i32, ptr %7, align 4
   %254 = add nsw i32 %253, 1
   %255 = sext i32 %254 to i64
-  %256 = getelementptr inbounds [2500 x i32], ptr %252, i64 %255
+  %256 = getelementptr inbounds [500 x i32], ptr %252, i64 %255
   %257 = load i32, ptr %8, align 4
   %258 = sub nsw i32 %257, 1
   %259 = sext i32 %258 to i64
-  %260 = getelementptr inbounds [2500 x i32], ptr %256, i64 0, i64 %259
+  %260 = getelementptr inbounds [500 x i32], ptr %256, i64 0, i64 %259
   %261 = load i32, ptr %260, align 4
   br label %262
 
@@ -478,10 +478,10 @@ define internal void @kernel_nussinov(i32 noundef %0, ptr noundef %1, ptr nounde
   %264 = load ptr, ptr %6, align 8
   %265 = load i32, ptr %7, align 4
   %266 = sext i32 %265 to i64
-  %267 = getelementptr inbounds [2500 x i32], ptr %264, i64 %266
+  %267 = getelementptr inbounds [500 x i32], ptr %264, i64 %266
   %268 = load i32, ptr %8, align 4
   %269 = sext i32 %268 to i64
-  %270 = getelementptr inbounds [2500 x i32], ptr %267, i64 0, i64 %269
+  %270 = getelementptr inbounds [500 x i32], ptr %267, i64 0, i64 %269
   store i32 %263, ptr %270, align 4
   br label %271
 
@@ -504,27 +504,27 @@ define internal void @kernel_nussinov(i32 noundef %0, ptr noundef %1, ptr nounde
   %280 = load ptr, ptr %6, align 8
   %281 = load i32, ptr %7, align 4
   %282 = sext i32 %281 to i64
-  %283 = getelementptr inbounds [2500 x i32], ptr %280, i64 %282
+  %283 = getelementptr inbounds [500 x i32], ptr %280, i64 %282
   %284 = load i32, ptr %8, align 4
   %285 = sext i32 %284 to i64
-  %286 = getelementptr inbounds [2500 x i32], ptr %283, i64 0, i64 %285
+  %286 = getelementptr inbounds [500 x i32], ptr %283, i64 0, i64 %285
   %287 = load i32, ptr %286, align 4
   %288 = load ptr, ptr %6, align 8
   %289 = load i32, ptr %7, align 4
   %290 = sext i32 %289 to i64
-  %291 = getelementptr inbounds [2500 x i32], ptr %288, i64 %290
+  %291 = getelementptr inbounds [500 x i32], ptr %288, i64 %290
   %292 = load i32, ptr %9, align 4
   %293 = sext i32 %292 to i64
-  %294 = getelementptr inbounds [2500 x i32], ptr %291, i64 0, i64 %293
+  %294 = getelementptr inbounds [500 x i32], ptr %291, i64 0, i64 %293
   %295 = load i32, ptr %294, align 4
   %296 = load ptr, ptr %6, align 8
   %297 = load i32, ptr %9, align 4
   %298 = add nsw i32 %297, 1
   %299 = sext i32 %298 to i64
-  %300 = getelementptr inbounds [2500 x i32], ptr %296, i64 %299
+  %300 = getelementptr inbounds [500 x i32], ptr %296, i64 %299
   %301 = load i32, ptr %8, align 4
   %302 = sext i32 %301 to i64
-  %303 = getelementptr inbounds [2500 x i32], ptr %300, i64 0, i64 %302
+  %303 = getelementptr inbounds [500 x i32], ptr %300, i64 0, i64 %302
   %304 = load i32, ptr %303, align 4
   %305 = add nsw i32 %295, %304
   %306 = icmp sge i32 %287, %305
@@ -534,10 +534,10 @@ define internal void @kernel_nussinov(i32 noundef %0, ptr noundef %1, ptr nounde
   %308 = load ptr, ptr %6, align 8
   %309 = load i32, ptr %7, align 4
   %310 = sext i32 %309 to i64
-  %311 = getelementptr inbounds [2500 x i32], ptr %308, i64 %310
+  %311 = getelementptr inbounds [500 x i32], ptr %308, i64 %310
   %312 = load i32, ptr %8, align 4
   %313 = sext i32 %312 to i64
-  %314 = getelementptr inbounds [2500 x i32], ptr %311, i64 0, i64 %313
+  %314 = getelementptr inbounds [500 x i32], ptr %311, i64 0, i64 %313
   %315 = load i32, ptr %314, align 4
   br label %335
 
@@ -545,19 +545,19 @@ define internal void @kernel_nussinov(i32 noundef %0, ptr noundef %1, ptr nounde
   %317 = load ptr, ptr %6, align 8
   %318 = load i32, ptr %7, align 4
   %319 = sext i32 %318 to i64
-  %320 = getelementptr inbounds [2500 x i32], ptr %317, i64 %319
+  %320 = getelementptr inbounds [500 x i32], ptr %317, i64 %319
   %321 = load i32, ptr %9, align 4
   %322 = sext i32 %321 to i64
-  %323 = getelementptr inbounds [2500 x i32], ptr %320, i64 0, i64 %322
+  %323 = getelementptr inbounds [500 x i32], ptr %320, i64 0, i64 %322
   %324 = load i32, ptr %323, align 4
   %325 = load ptr, ptr %6, align 8
   %326 = load i32, ptr %9, align 4
   %327 = add nsw i32 %326, 1
   %328 = sext i32 %327 to i64
-  %329 = getelementptr inbounds [2500 x i32], ptr %325, i64 %328
+  %329 = getelementptr inbounds [500 x i32], ptr %325, i64 %328
   %330 = load i32, ptr %8, align 4
   %331 = sext i32 %330 to i64
-  %332 = getelementptr inbounds [2500 x i32], ptr %329, i64 0, i64 %331
+  %332 = getelementptr inbounds [500 x i32], ptr %329, i64 0, i64 %331
   %333 = load i32, ptr %332, align 4
   %334 = add nsw i32 %324, %333
   br label %335
@@ -567,10 +567,10 @@ define internal void @kernel_nussinov(i32 noundef %0, ptr noundef %1, ptr nounde
   %337 = load ptr, ptr %6, align 8
   %338 = load i32, ptr %7, align 4
   %339 = sext i32 %338 to i64
-  %340 = getelementptr inbounds [2500 x i32], ptr %337, i64 %339
+  %340 = getelementptr inbounds [500 x i32], ptr %337, i64 %339
   %341 = load i32, ptr %8, align 4
   %342 = sext i32 %341 to i64
-  %343 = getelementptr inbounds [2500 x i32], ptr %340, i64 0, i64 %342
+  %343 = getelementptr inbounds [500 x i32], ptr %340, i64 0, i64 %342
   store i32 %336, ptr %343, align 4
   br label %344
 
@@ -655,10 +655,10 @@ define internal void @print_array(i32 noundef %0, ptr noundef %1) #0 {
   %31 = load ptr, ptr %4, align 8
   %32 = load i32, ptr %5, align 4
   %33 = sext i32 %32 to i64
-  %34 = getelementptr inbounds [2500 x i32], ptr %31, i64 %33
+  %34 = getelementptr inbounds [500 x i32], ptr %31, i64 %33
   %35 = load i32, ptr %6, align 4
   %36 = sext i32 %35 to i64
-  %37 = getelementptr inbounds [2500 x i32], ptr %34, i64 0, i64 %36
+  %37 = getelementptr inbounds [500 x i32], ptr %34, i64 0, i64 %36
   %38 = load i32, ptr %37, align 4
   %39 = call i32 (ptr, ptr, ...) @fprintf(ptr noundef %30, ptr noundef @.str.5, i32 noundef %38)
   %40 = load i32, ptr %7, align 4

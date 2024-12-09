@@ -12,7 +12,7 @@
 
 /* Default to LARGE_DATASET. */
 # if !defined(MINI_DATASET) && !defined(SMALL_DATASET) && !defined(MEDIUM_DATASET) && !defined(LARGE_DATASET) && !defined(EXTRALARGE_DATASET)
-#  define LARGE_DATASET
+#  define EXTRALARGE_DATASET
 # endif
 
 # if !defined(NI) && !defined(NJ) && !defined(NK) && !defined(NL) && !defined(NM)
@@ -69,12 +69,13 @@
 
 /* Default data type */
 # if !defined(DATA_TYPE_IS_INT) && !defined(DATA_TYPE_IS_FLOAT) && !defined(DATA_TYPE_IS_DOUBLE)
-#  define DATA_TYPE_IS_DOUBLE
+#  define DATA_TYPE_IS_INT
 # endif
 
 #ifdef DATA_TYPE_IS_INT
 #  define DATA_TYPE int
 #  define DATA_PRINTF_MODIFIER "%d "
+#  define SCALAR_VAL(x) x
 #endif
 
 #ifdef DATA_TYPE_IS_FLOAT
